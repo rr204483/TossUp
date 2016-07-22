@@ -1,0 +1,60 @@
+1.0 ==>  Initial release
+1.1 ==>  In the appstore version, the heads/tails images are displayed. fixed that by modifying displayResult fun as it is now. the old displayResult function is here for your reference.
+
+
+-(void) flipCoin:(id) sender {
+    
+    if ( [self.countryPrefix length] == 0 ) {
+        [self displayAlert:@"No coins selected" Message:@"Select the coin by tapping an image"];
+        return;
+    }
+    //clear the img
+    [self.resultTxtImgView setImage:nil];
+    
+    [resultImgView setFrame:CGRectMake(80,140,155,155)];
+    [resultImgView startAnimating];
+    
+    // to disable user interaction with an img while animating
+    //resultImgView.userInteractionEnabled = NO;
+    [self enableUserInteractionOnImg:NO];
+
+    int randomNumber = (NSInteger)(arc4random_uniform(2));
+    NSString *tossValue;
+    
+    //1 --> heads, 0 --> tails
+    
+    if (randomNumber)
+        tossValue=@"Heads";
+    else
+        tossValue=@"Tails";
+    
+    //delaying it 4 seconds, it can be implemented using selectors like below
+    [self performSelector:@selector(displayResult:)  withObject:tossValue afterDelay:2];
+
+}
+
+-(void) displayResult :(NSString *) tossValue {
+    
+    NSString *nameForTxtImg = [NSString stringWithFormat:@"%@.png",tossValue.uppercaseString ];
+    
+    NSLog(@"first time:%@", nameForTxtImg);
+    
+    NSString *nameForResultImg=[NSString stringWithFormat:@"%@%@.png", self.countryPrefix,tossValue];
+
+    
+    //animating the image button
+    [resultImgView stopAnimating];
+    [resultImgView setFrame:CGRectMake(80,140,155,155)];
+    [resultImgView setImage:[UIImage imageNamed:nameForResultImg]];
+    
+    //[self.resultTxtImgView setFrame:CGRectMake(100, 320, 120, 40)];
+    [self.resultTxtImgView setImage:[UIImage imageNamed:nameForTxtImg.lowercaseString]];
+    NSLog(@"actual image name:%@", nameForTxtImg.lowercaseString);
+    
+    //to enable user interaction with an img after animating
+    //resultImgView.userInteractionEnabled = YES;
+    [self enableUserInteractionOnImg:YES];
+
+}
+
+

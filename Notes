@@ -1,0 +1,48 @@
+AppName : TossUp
+
+//            NSLog(@"");
+//            UIImage* sourceImage = [UIImage imageNamed:@"inHeads.png"];
+//            UIImage* flippedImage = [UIImage imageWithCGImage:sourceImage.CGImage
+//                                                        scale:1.0 orientation: UIImageOrientationUpMirrored];
+//            
+//            [selectedBtn setBackgroundImage:flippedImage forState:UIControlStateNormal];
+
+
+You can check if [string length] == 0. This will check if it's a valid but empty string (@"") as well as if its nil, since calling length on nil will also return 0.
+
+
+    
+//    UIButton *statusBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    statusBtn.frame = CGRectMake(0, 3, 25, 20);
+//    [statusBtn setImage:[UIImage imageNamed:@"locator_on.png"] forState:UIControlStateNormal];
+
+    
+    //    // Background image
+    //    UIImageView *backgroundIV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.jpg"]];
+    //    [self.view addSubview:backgroundIV];
+    //    [backgroundIV release];
+
+
+ UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
+    singleTap.numberOfTapsRequired = 1;
+    resultImgView.userInteractionEnabled = YES;
+    [resultImgView addGestureRecognizer:singleTap];
+    
+    
+    -(void) motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    if (motion == UIEventSubtypeMotionShake) {
+        [self flipCoin:nil];
+    }
+}
+
+-(BOOL) canBecomeFirstResponder {
+    return YES;
+}
+
+-(void) dealloc {
+    [super dealloc];
+}
+
+viewDidLoad () {
+[self becomeFirstResponder];
+}
